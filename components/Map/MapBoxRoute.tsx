@@ -1,12 +1,19 @@
 import React from 'react'
 import Map, { AttributionControl, GeolocateControl , Layer, Marker, NavigationControl,
     Popup, Source } from "react-map-gl";
+import { Feature } from 'geojson';
 function MapBoxRoute(props:any) {
 
 
   return (
-    <Source type="geojson" data={{ type: 'Feature', geometry: 
-{ type: 'LineString', coordinates: props.coordinates } }}>
+    <Source type="geojson" data={{
+      type: 'Feature',
+      geometry: {
+        type: 'LineString',
+        coordinates: props.coordinates,
+      },
+      properties: {}, // You can add properties if needed
+    }}>
         <Layer
           type="line"
           layout={{ 'line-join': 'round', 'line-cap': 'square' }}
