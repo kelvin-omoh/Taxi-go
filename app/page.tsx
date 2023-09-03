@@ -30,7 +30,7 @@ export default function Home() {
     })
   }
   return (
-    <div className=' h-[100vh] flex justify-center items-center'>
+    <div className=' '>
       <UserLocationContext.Provider value={{userLocation,setUserLocation}}>
       <SourceCordiContext.Provider value={{soruceCordinates,setSourceCordinates}}>
       <DestinationCordiContext.Provider value={{destinationCordinates,setDestinationCordinates}}>
