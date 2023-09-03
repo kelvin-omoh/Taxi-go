@@ -57,7 +57,7 @@ const handleFlutterPayment = useFlutterwave(config);
   return (
     <div className='p-5   '>
         <h2 className='text-[20px] font-semibold'>Booking</h2>
-        <div className='border-[1px]   p-5 
+        <div className='border-[1px] p-4 
         rounded-md' >
         <AutocompleteAddress/>
        
