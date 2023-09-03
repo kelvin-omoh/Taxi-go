@@ -1,4 +1,5 @@
 import { DirectionDataContext } from '@/context/DirectionDataContext';
+import { PriceOfCarContext } from '@/context/PriceOfCarContext';
 import CarsList from '@/data/CarsList'
 import Image from 'next/image'
 import React, { useContext, useState } from 'react'
@@ -7,14 +8,21 @@ function Cars() {
     const [selectedCar,setSelectedCar]=useState<any>()
     const {directionData, setDirectionData} 
     = useContext(DirectionDataContext);
+    const {priceOfCar,setpriceOfCar} 
+    = useContext(PriceOfCarContext);
 
     const getCost=(charges:any)=>{
-      if(charges*directionData?.routes[0]?.distance){
-          return (charges*directionData?.routes[0]?.distance* 0.000621371192)
-      .toFixed(2)
-      }else(
-        999999999 * 0.000621371192
-      )
+      if (charges && directionData && directionData.routes[0] && directionData.routes[0].distance) {
+        const cost = charges * directionData.routes[0].distance * 0.000621371192;
+        setpriceOfCar(cost.toFixed(2)); 
+        return cost.toFixed(2);
+      } else {
+        setpriceOfCar((999999999 * 0.000621371192).toFixed(2));
+
+        return (999999999 * 0.000621371192).toFixed(2)
+          
+          ;
+      }
     
     }
   return (
