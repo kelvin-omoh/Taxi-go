@@ -90,7 +90,7 @@ const handleFlutterPayment = useFlutterwave(config);
         className={`w-full
         ${priceOfCar ? '   bg-yellow-400 cursor-pointer':'bg-gray-200 cursor-not-allowed'}
       
-        p-1 rounded-md
+        p-2 rounded-md
         mt-4`}>Book</button>
         
         </div> 
