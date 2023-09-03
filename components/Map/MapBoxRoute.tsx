@@ -1,6 +1,6 @@
 import React from 'react'
 import Map, { AttributionControl, GeolocateControl , Layer, Marker, NavigationControl,
-    , Source } from "react-map-gl";
+   Source } from "react-map-gl";
 import { Feature } from 'geojson';
 function MapBoxRoute(props:any) {
 

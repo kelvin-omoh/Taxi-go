@@ -14,26 +14,44 @@ function Booking() {
   = useContext(PriceOfCarContext);
   const calculatedAmount = priceOfCar ? priceOfCar : 2000;
 
-    // const screenHight=window.innerHeight*0.72;
-    const config = {
-      public_key: `FLWPUBK_TEST-841c10b026f35195c62cfc032d14c5a0-X`,
-      tx_ref: Date.now(),
-      amount: calculatedAmount,
-      currency: 'NGN',
-      payment_options: 'card,mobilemoney,ussd',
-      customer: {
-        email: `${user?.emailAddresses? user?.emailAddresses: "enaikeleomoh@gmail.com"}`,
-         phone_number: `${user?.phoneNumbers}`,
-        name: `${user?.fullName}`,
-      },
-      customizations: {
-        title: `Taxi`,
-        description: 'Payment for taxi',
-        logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
-      },
+
+  interface FlutterwaveConfig {
+    public_key: string;
+    tx_ref: string; // Change to string type since Date.now() returns a number
+    amount: number; // Change 'any' to 'number' assuming amount is a number
+    currency: string;
+    payment_options: string;
+    customer: {
+      email: string;
+      phone_number: string;
+      name: string;
     };
+    customizations: {
+      title: string;
+      description: string;
+      logo: string;
+    };
+  }
   
-    const handleFlutterPayment = useFlutterwave(config);
+   const config: FlutterwaveConfig = {
+  public_key: `FLWPUBK_TEST-841c10b026f35195c62cfc032d14c5a0-X`,
+  tx_ref: Date.now().toString(), // Ensure tx_ref is a string
+  amount: calculatedAmount, // Assuming calculatedAmount is a number
+  currency: 'NGN',
+  payment_options: 'card,mobilemoney,ussd',
+  customer: {
+    email: `${user?.emailAddresses ? user?.emailAddresses : 'enaikeleomoh@gmail.com'}`,
+    phone_number: `${user?.phoneNumbers}`,
+    name: `${user?.fullName}`,
+  },
+  customizations: {
+    title: `Taxi`,
+    description: 'Payment for taxi',
+    logo: 'https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg',
+  },
+};
+
+const handleFlutterPayment = useFlutterwave(config);
   
 
   return (
@@ -47,7 +65,9 @@ function Booking() {
         <Cards/>
         <button 
         onClick={() => {
-          handleFlutterPayment({
+          if(priceOfCar){
+
+              handleFlutterPayment({
             callback: (response) => { 
               console.log(response);
              
@@ -56,15 +76,22 @@ function Booking() {
             },
             onClose: () => {},
           });
+
+
+          }else{
+            alert("please select a car and put your location")
+          }
+        
         }}
         
         
         
         
-        className='w-full
-         bg-yellow-400
+        className={`w-full
+        ${priceOfCar ? '   bg-yellow-400 cursor-pointer':'bg-gray-200 cursor-not-allowed'}
+      
         p-1 rounded-md
-        mt-4'>Book</button>
+        mt-4`}>Book</button>
         
         </div> 
     </div>
